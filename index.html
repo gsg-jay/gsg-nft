@@ -5,11 +5,245 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>example website</title>
+    <meta name="description" content="GemSword NFT Collection">
+    <title>GemSword NFT Collection</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: "CrossBar";
+            src: url("public/Crossbar.woff2") format("woff2");
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0px auto;
+            position: relative;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                font-size: 12px;
+            }
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            max-width: 1440px;
+            width: 100%;
+            height: 100%;
+            border: thick solid lightgrey;
+            padding: 12px;
+            position: relative;
+        }
+
+        section.title {
+            padding: 64px 12px;
+        }
+
+        p.title {
+            text-align: center;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Crossbar";
+            flex-basis: 100%;
+        }
+
+        h1.title {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+
+        }
+
+        h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 1.3rem;
+            text-align: left;
+            opacity: .8;
+        }
+
+        article.card {
+            cursor: pointer;
+            border: thin solid grey;
+            text-align: left;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1;
+            position: relative;
+            min-height: 400px;
+            width: 100%;
+            min-width: 240px;
+            padding: 12px;
+            background: #eee;
+            z-index: 1;
+            transition: .3s;
+        }
+
+        article.card:hover {
+            transform: scale(1.025);
+            background: white;
+            transition: 1s;
+            z-index: 2;
+        }
+
+        article.card div.thumb {
+            height: 240px;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        article.card div.thumb:not(:hover) {
+            background-position: top center;
+            transition: .3s;
+        }
+
+        article.card div.thumb:hover {
+            background-position: center;
+            transition: 4s;
+        }
+
+        article.card div.desc {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: left;
+            width: 100%;
+        }
+
+        div.bio-label,
+        div.bio-content {
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            justify-self: flex-start;
+            text-align: left;
+        }
+
+        div.bio-label {
+            flex-shrink: 1;
+        }
+
+        div.bio-content {
+            flex: 1;
+        }
+
+        article.card img.author {
+            border-radius: 50%;
+            height: 72px;
+            width: 72px;
+            margin: 4px;
+        }
+
+        .bio-content textarea {
+            width: 80%;
+            margin: 0 auto;
+            min-height: 100px;
+            background: #003;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            line-height: 1.5;
+            letter-spacing: 0.2ch;
+            font-size: 1rem;
+            resize: none;
+            overflow-y: scroll;
+        }
+
+        footer {
+            margin: 96px 0;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>This is a test website</h1>
+    <section class="title">
+        <h1 class="title">NFT Collection</h1>
+        <p class="title">by Jay</p>
+    </section>
+    <main class="content"></main>
+    <footer>
+        <a href="https://www.twitter.com/jbedstark">Twitter</a>
+    </footer>
+    <script>
+        const drops = [
+            {
+                id: "Mistrad",
+                images: {
+                    thumb: "nft_01_thb.jpg",
+                },
+                minted: "2023 March 23",
+                description: {
+                    element: "Dark",
+                    powers: [`Lightning magic`, `indomitable willpower`],
+                    likes: ['Cake', 'books'],
+                    dislikes: ['Bananas', 'pop songs'],
+                    bio: `A passionate martial artist, Mistrad spends his time to perfecting his speed, strength and technique to destroy any opponent.`,
+                }
+            },
+            {
+                id: "Judith (Hexblight)",
+                images: {
+                    thumb: "nft_02_thb.jpg",
+                },
+                minted: "2023 March 23",
+                description: {
+                    element: "Ice",
+                    powers: ['Ice magic', 'telekinesis'],
+                    likes: ['Rain', 'cake'],
+                    dislikes: ['Gossip', 'cream cheese'],
+                    bio: `Judith is cursed to live as the demon Hexblight for eternity. She is now bonded to a host and can assume human form.`,
+                }
+            }
+        ]
+        // const authorTag = `<div><img class="author" src="public/${drop?.images.author}" /></div>`
+        const content = drops.map((drop) =>
+            `<article class="card">
+                <div class="thumb" style="background-image: url(public/${drop?.images.thumb})"></div>
+                <div><pre>${drop?.minted}</pre></div>
+                <div><h2>"${drop?.id}"</h2></div>
+                <div class="desc">
+                    <div class="bio-label"><h3>Element: </h3></div>
+                    <div class="bio-content"><pre>${drop?.description?.element}</pre></div>
+                </div>
+                <div class="desc">
+                    <div class="bio-label"><h3>Powers: </h3></div>
+                    <div class="bio-content"><pre>${drop?.description?.powers?.join(', ')}</pre></div>
+                </div>
+                <div class="desc">
+                    <div class="bio-label"><h3>likes: </h3></div>
+                    <div class="bio-content"><pre>${drop?.description?.likes?.join(', ')}</pre></div>
+                </div>
+                <div class="desc">
+                    <div class="bio-label"><h3>dislikes: </h3></div>
+                    <div class="bio-content"><pre>${drop?.description?.dislikes?.join(', ')}</pre></div>
+                </div>
+                <div class="desc">
+                    <div class="bio-label"><h3>Bio: </h3></div>
+                    <div class="bio-content"><textarea>${drop?.description?.bio}</textarea></div>
+                </div>
+            </article>`)
+        document.querySelector('main.content').innerHTML += content;
+    </script>
 </body>
 
 </html>
